@@ -94,7 +94,7 @@
 </li>
 <li>the user constructs a message consisting of these proof and the number of new tokens <span class="code">t</span></li>
 <li>the user signs the message and sends it to the contract</li>
-<li>the contract validates the proofs</li>
+<li>the contract validates the proofs and signature</li>
 <li>the contract validates that identity <span class="code">j</span> can mint tokens to position <span class="code">i</span></li>
 <li>the contract checks to see if the balance would overflow</li>
 <li>the contract constructs a commitment to <span class="com">x<sup>i</sup>·t</span></li>
@@ -221,6 +221,7 @@
 <li>the aggregator should also provide proofs that<ul>
 <li><span class="code">SELECTION<sub>+1</sub>·VOTES == p·H("On question abcd, I vote +1")</span></li>
 <li><span class="code">SELECTION<sub>-1</sub>·VOTES == p·H("On question abcd, I vote -1")</span></li>
+<li>theoretically, multiple users could coordinate so none of their commitments are valid, but they still add the sum of valid commitments. This is fine - they still need to choose their votes beforehand. Moreover, they can't use this technique to hijack with an unwilling voter's ballot because all users in the `SELECTION` need to sign the reveal</li>
 </ul>
 </li>
 <li>as before, the contract can update <span class="code">tally</span> with <span class="code">BALANCES.(SELECTION<sub>+1</sub> - SELECTION<sub>-1</sub>)</span></li>
