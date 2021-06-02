@@ -10,6 +10,16 @@
 <h1>Ethereum Vote Aggregation</h1>
 <h2>Overview</h2>
 <p>Standard Ethereum voting contracts could benefit from a mechanism to aggregate votes offline and efficiently validate and tally them on-chain. Here is a proposed design based on the Kate Polynomial Commitment scheme and BLS signatures, which are both gaining traction in the Ethereum community. I'm a few steps out of my depth, and there are parts of the design that need to be hardened, so feedback and corrections are most welcome.</p>
+<p>The core idea is that if (somehow)
+<ul>
+<li>the contract has a commitment to all the balances <span class="com">B</span> = <span class="code">Commitment([500, 25, 376, 29, ...])</span></li>
+<li>and a commitment to all the corresponding votes <span class="com">V</span> = <span class="code">Commitment([+1, -1, -1, +1, ...])</span></li>
+<li>the dot product of these is the final tally <span class="code">T = 500 - 25 - 376 + 29 + ...</span></li>
+<li>anyone could calculate that value offline and present it to the contract</li>
+<li>the contract would just need to check the equation to validate <span class="code">T</span></li>
+</ul>
+<p>In this way, the contract does not need to know or handle individual balances or votes, saving storage and computation costs. The rest of this proposal just describes a mechanism to construct those commitments correctly and securely.</p> 
+</p>
 <h2>Background</h2>
 <h3>Kate Polynomial Commitments</h3>
 <p>The scheme is defined <a href="https://www.iacr.org/archive/asiacrypt2010/6477178/6477178.pdf">here</a>. In short:</p>
