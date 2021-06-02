@@ -213,7 +213,7 @@
 </li>
 <li>as noted above, the contract needs to confirm that the unblinding commitment has the form <span class="com">0</span><span class="blind">|r(x)</span><ul>
 <li>the user just needs to supply  <span class="com">r(x)</span> and prove that <span class="code"><span class="com">0</span><span class="blind">|r(x)</span> == <span class="com">0</span><span class="blind">|1</span>·<span class="com">r(x)</span></span> </li>
-<li>note the both sides of this equation are equivalent to <span class="com">λ·r(x)</span></li>
+<li>note that both sides of this equation are equivalent to <span class="com">λ·r(x)</span></li>
 </ul>
 </li>
 <li>the contract can unblind the subset of votes by adding the unblinding commitment to <span class="com">VOTES</span><span class="blind">|r</span></li>
@@ -221,7 +221,7 @@
 <li>the aggregator should also provide proofs that<ul>
 <li><span class="code">SELECTION<sub>+1</sub>·VOTES == p·H("On question abcd, I vote +1")</span></li>
 <li><span class="code">SELECTION<sub>-1</sub>·VOTES == p·H("On question abcd, I vote -1")</span></li>
-<li>theoretically, multiple users could coordinate so none of their commitments are valid, but they still add the sum of valid commitments. This is fine - they still need to choose their votes beforehand. Moreover, they can't use this technique to hijack with an unwilling voter's ballot because all users in the `SELECTION` need to sign the reveal</li>
+<li>theoretically, multiple users could coordinate so none of their commitments are valid, but they still add to the sum of valid commitments. This is fine - they still need to choose their votes beforehand. Moreover, they can't use this technique to hijack an unwilling voter's ballot because all users in the <span class="code">SELECTION</span> need to sign the reveal</li>
 </ul>
 </li>
 <li>as before, the contract can update <span class="code">tally</span> with <span class="code">BALANCES.(SELECTION<sub>+1</sub> - SELECTION<sub>-1</sub>)</span></li>
